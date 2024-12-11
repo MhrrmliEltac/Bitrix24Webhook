@@ -19,7 +19,6 @@ const DataTable = () => {
   const [editRow, setEditRow] = useState(null);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  console.log(editRow);
 
   const columns = React.useMemo(
     () => [
@@ -52,7 +51,7 @@ const DataTable = () => {
               variant="contained"
               color="secondary"
               size="small"
-              onClick={() => handleDelete(params.row.ID)}
+              onClick={() => handleDelete(params.row.id)}
             >
               Delete
             </Button>
@@ -93,11 +92,16 @@ const DataTable = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.post(
+      const response = await axios.post(
         "https://b24-vhllhk.bitrix24.com/rest/1/w87hywenqphcvbe7/crm.deal.delete.json",
         { ID: id }
       );
-      getData();
+
+      if (response.data.result) {
+        getData(); 
+      } else {
+        console.error("Delete failed", response.data);
+      }
     } catch (error) {
       console.error("Error deleting data: ", error);
     }
@@ -134,7 +138,6 @@ const DataTable = () => {
       console.error("Error updating data: ", error);
     }
   };
-
 
   useEffect(() => {
     getData();
