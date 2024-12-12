@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const AddLead = () => {
   const [formData, setFormData] = useState({
@@ -40,7 +41,7 @@ const AddLead = () => {
         "https://b24-vhllhk.bitrix24.com/rest/1/w87hywenqphcvbe7/crm.lead.add.json",
         data
       );
-      alert(`Lead uğurla əlavə edildi! ID: ${response.data.result}`);
+      toast.success("Lead uğurla əlavə edildi");
     } catch (error) {
       console.error("Lead əlavə edilmədi:", error);
       alert("Xəta baş verdi. Lead əlavə edilmədi.");

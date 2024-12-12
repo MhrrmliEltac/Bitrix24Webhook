@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const DataTable = () => {
   const [data, setData] = useState([]);
@@ -96,9 +97,10 @@ const DataTable = () => {
         "https://b24-vhllhk.bitrix24.com/rest/1/w87hywenqphcvbe7/crm.deal.delete.json",
         { ID: id }
       );
+      toast.success("Uğurla silindi");
 
       if (response.data.result) {
-        getData(); 
+        getData();
       } else {
         console.error("Delete failed", response.data);
       }
@@ -113,7 +115,6 @@ const DataTable = () => {
 
   const handleSave = async () => {
     try {
-      // Prepare the fields object with only the relevant keys
       const fields = {
         TITLE: editRow.TITLE,
         CURRENCY_ID: editRow.CURRENCY,
@@ -122,17 +123,17 @@ const DataTable = () => {
         TYPE_ID: editRow.TYPE,
       };
 
-      // Send the update request
       await axios.post(
         "https://b24-vhllhk.bitrix24.com/rest/1/w87hywenqphcvbe7/crm.deal.update.json",
         {
-          ID: editRow.id, // Ensure 'id' is passed here, not 'ID'
+          ID: editRow.id,
           fields: fields,
         }
       );
 
       getData();
       setOpen(false);
+      toast.success("Uğurla yeniləndi");
       setEditRow(null);
     } catch (error) {
       console.error("Error updating data: ", error);
@@ -149,17 +150,33 @@ const DataTable = () => {
         <Box
           sx={{
             display: "flex",
-            justifyContent: "flex-end",
+            justifyContent: "space-between",
             marginBottom: "10px",
           }}
         >
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => navigate("/add-lead")}
+          <Box>
+          </Box>
+          <Box
+            sx={{
+              gap: "10px",
+              display: "flex",
+            }}
           >
-            Add Lead
-          </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => navigate("/add-lead")}
+            >
+              Add Lead
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => navigate("/show-lead")}
+            >
+              Show Lead
+            </Button>
+          </Box>
         </Box>
         <Paper sx={{ height: 400, width: "100%" }}>
           <DataGrid
