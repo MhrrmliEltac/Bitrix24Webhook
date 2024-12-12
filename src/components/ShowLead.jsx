@@ -3,9 +3,11 @@ import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const ShowLead = () => {
   const [user, setUser] = useState([]);
+  const navigate = useNavigate();
 
   const columns = React.useMemo(
     () => [
@@ -85,6 +87,29 @@ const ShowLead = () => {
   return (
     <Box className="container">
       <Box sx={{ width: "90%" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: "10px",
+          }}
+        >
+          <Box></Box>
+          <Box
+            sx={{
+              gap: "10px",
+              display: "flex",
+            }}
+          >
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => navigate("/")}
+            >
+              Show Deals
+            </Button>
+          </Box>
+        </Box>
         <Paper sx={{ height: 400, width: "100%" }}>
           <DataGrid
             rows={user}
