@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import axios from "axios";
 import AddLead from "./components/AddLead";
 import DataTable from "./components/Table";
-import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router";
 import ShowLead from "./components/showLead";
 import { Toaster } from "react-hot-toast";
