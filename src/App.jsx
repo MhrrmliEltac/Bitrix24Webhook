@@ -2,7 +2,7 @@ import "./App.css";
 import AddLead from "./components/AddLead";
 import DataTable from "./components/Table";
 import { BrowserRouter, Routes, Route } from "react-router";
-import ShowLead from "./components/showLead";
+import ShowLead from "./components/ShowLead";
 import { Toaster } from "react-hot-toast";
 
 function App() {
